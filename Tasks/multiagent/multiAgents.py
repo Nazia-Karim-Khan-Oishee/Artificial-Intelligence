@@ -278,7 +278,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
     def value(self, gameState, agentIndex, depth):
         if depth == 0 or gameState.isWin() or gameState.isLose():
             return self.evaluationFunction(gameState), Directions.STOP
-        elif agentIndex == 0:
+        elif agentIndex == 0:  #pacman
             return self.maxValue(gameState, agentIndex, depth)
         else:
             return self.expValue(gameState, agentIndex, depth)
@@ -332,7 +332,7 @@ def betterEvaluationFunction(currentGameState):
     closestFood = min(foodDists) if len(foodDists) > 0 else 0
     score += 1/(closestFood + 1)
 
-    ghosts = [ghost for ghost in currentGameState.getGhostStates() if ghost.scaredTimer != 0]
+    ghosts = [ghost for ghost in currentGameState.getGhostStates() if ghost.scaredTimer != 0] #scared
     ghostDists = [util.manhattanDistance(position, ghost.getPosition()) for ghost in ghosts]
     closestGhost = min(ghostDists) if len(ghostDists) > 0 else 0
     score += 1/(closestGhost + 1)
